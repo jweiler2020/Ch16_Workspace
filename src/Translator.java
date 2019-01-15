@@ -8,6 +8,7 @@ public class Translator extends JFrame
 	private static final String translated = "Eu não falo português.";
 	
 	private JButton translate;
+	private JTextField englIn, portIn;
 	
 	public Translator()
 	{
@@ -19,11 +20,17 @@ public class Translator extends JFrame
 		labels.setLayout(new GridLayout(2, 1));
 		labels.add(engl);
 		labels.add(port);
-		JTextField englIn = new JTextField();
-		JTextField portIn = new JTextField();
+		englIn = new JTextField(100);
+		portIn = new JTextField(100);
+		/*
 		JPanel inputs = new JPanel();
 		inputs.setLayout(new GridLayout(2, 1));
 		inputs.add(englIn);
+		inputs.add(portIn);
+		*/
+		Box inputs = Box.createVerticalBox();
+		inputs.add(englIn);
+		inputs.add(Box.createVerticalStrut(10));
 		inputs.add(portIn);
 		
 		Box inputLabels = Box.createHorizontalBox();
@@ -32,6 +39,8 @@ public class Translator extends JFrame
 		inputLabels.add(inputs);
 		
 		translate = new JButton("Translate");
+		translate.setAlignmentX(Component.CENTER_ALIGNMENT);
+		translate.addActionListener(this);
 		
 		Box everything = Box.createVerticalBox();
 		everything.add(inputLabels);
@@ -44,6 +53,8 @@ public class Translator extends JFrame
 	
 	public void actionPerformed(ActionEvent e)
 	{
+		if(e.getSource() == translate)
+			portIn.setText(translated);
 	}
 	
 	public static void main(String[] args)
